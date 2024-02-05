@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.teragrep</groupId>
   <artifactId>pth_06</artifactId>
-  <version>${git.commit.id.describe}</version>
+  <version>${teragrep.pth_06.version}</version>
   <name>pth_06</name>
   <description>Teragrep Datasource for Apache Spark</description>
   <url>https://teragrep.com</url>
@@ -19,6 +19,7 @@
     <teragrep.rlo_06.version>4.3.0</teragrep.rlo_06.version>
     <teragrep.rad_01.version>1.0.1</teragrep.rad_01.version>
     <teragrep.jue_01.version>0.4.3</teragrep.jue_01.version>
+    <teragrep.pth_06.version>0.0.1-SNAPSHOT</teragrep.pth_06.version>
   </properties>
   <scm>
     <connection>scm:git:https://github.com/StrongestNumber9/pth_06.git</connection>
@@ -190,39 +191,6 @@
     <directory>${project.basedir}/target</directory>
     <finalName>pth_06</finalName>
     <plugins>
-      <plugin>
-        <groupId>pl.project13.maven</groupId>
-        <artifactId>git-commit-id-plugin</artifactId>
-        <version>4.9.10</version>
-        <executions>
-          <execution>
-            <id>get-the-git-infos</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>revision</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>validate-the-git-infos</id>
-            <goals>
-              <goal>validateRevision</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
-        <configuration>
-          <injectAllReactorProjects>true</injectAllReactorProjects>
-          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-          <prefix>git</prefix>
-          <verbose>true</verbose>
-          <gitDescribe>
-            <tags>true</tags>
-            <skip>false</skip>
-            <always>true</always>
-            <dirty>-dirty</dirty>
-          </gitDescribe>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
