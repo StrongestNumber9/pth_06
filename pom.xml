@@ -22,9 +22,9 @@
     <teragrep.pth_06.version>0.0.1-SNAPSHOT</teragrep.pth_06.version>
   </properties>
   <scm>
-    <connection>scm:git:https://github.com/StrongestNumber9/pth_06.git</connection>
-    <developerConnection>scm:git:git@github.com:StrongestNumber9/pth_06.git</developerConnection>
-    <url>https://github.com/StrongestNumber9/pth_06/tree/master</url>
+    <connection>scm:git:https://github.com/teragrep/pth_06.git</connection>
+    <developerConnection>scm:git:git@github.com:teragrep/pth_06.git</developerConnection>
+    <url>https://github.com/teragrep/pth_06/tree/master</url>
   </scm>
   <licenses>
     <license>
@@ -430,7 +430,7 @@
         <repository>
           <id>github</id>
           <name>GitHub Packages</name>
-          <url>https://maven.pkg.github.com/StrongestNumber9/pth_06</url>
+          <url>https://maven.pkg.github.com/teragrep/pth_06</url>
         </repository>
       </distributionManagement>
     </profile>
