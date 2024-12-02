@@ -57,8 +57,9 @@ jobs:
 
       - name: env print
         run: env
+
       - name: env print2
-        run: echo "env: ${{ env.RUNNER_TEMP}}"
+        run: echo "env: ${{ env.RUNNER_TEMP }}"
 
       - name: Get version
         run: echo "RELEASE_VERSION=$(git describe --tags)" >> $GITHUB_ENV
