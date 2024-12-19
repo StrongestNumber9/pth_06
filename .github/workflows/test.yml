@@ -17,23 +17,23 @@ jobs:
           fetch-tags: true
 
       - name: Download Coverity distribution md5sum for cache key
-        run: echo ping > ${RUNNER_TEMP}/coverity_tool.md5
+        run: echo ping > ${GITHUB_WORKSPACE}/coverity_tool.md5
 
       - name: Get filename
-        run: printf "COVERITY_FILEPATH=${{ format('{0}/coverity_tool.md5', runner.temp) }}" >> $GITHUB_ENV
+        run: printf "COVERITY_FILEPATH=${{ format('{0}/coverity_tool.md5', github.workspace) }}" >> $GITHUB_ENV
 
       - name: Cache pull Coverity distribution, extracted
         id: cache-pull-coverity-distribution
         uses: actions/cache@v4
         with:
           path: ${{ env.COVERITY }}
-          key: ${{ runner.os }}-coverity-${{ hashFiles(format('{0}/coverity_tool.md5', runner.temp)) }}
+          key: ${{ runner.os }}-coverity-${{ hashFiles(format('{0}/coverity_tool.md5', github.workspace)) }}
           
       - name: Download and extract Coverity distribution if cache-miss
         if: steps.cache-pull-coverity-distribution.outputs.cache-hit != 'true'
         run: |
-          echo hash files ${{ hashFiles('${{ runner.temp }}/coverity_tool.md5') }}
-          echo hash files2 ${{ hashFiles('${{ env.COVERITY_FILEPATH }}') }}
+          echo hash files ${{ hashFiles('${{ github.workspace }}/coverity_tool.md5') }}
+          echo hash files2 ${{ hashFiles('${{ env.GITHUB_WORKSPACE }}') }}
           echo test: ${{ hashFiles(env.COVERITY_FILEPATH) }}
           echo test3: ${{ env.COVERITY_FILEPATH }}
           cat ${{ env.COVERITY_FILEPATH }}
