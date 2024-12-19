@@ -34,4 +34,6 @@ jobs:
         run: |
           echo hash files ${{ hashFiles('${{ runner.temp }}/coverity_tool.md5') }}
           echo test: ${{ hashFiles(env.COVERITY_FILEPATH) }}
-          echo test: ${{ env.COVERITY_FILEPATH }}
+          echo test2: ${{ hashFiles( ${{env.COVERITY_FILEPATH)} } }}
+          echo test3: ${{ env.COVERITY_FILEPATH }}
+          cat ${{ env.COVERITY_FILEPATH }}
