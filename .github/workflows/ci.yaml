@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  upload:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Local Maven Repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+
+      - name: Setup Signing
+        uses: actions/setup-java@v4
+        with:
+          java-version: 8.0.292+10
+          distribution: 'adopt'
+
+      - name: Get version
+        run: printf "RELEASE_VERSION=%q\n" "$(git describe --tags)" >> $GITHUB_ENV
+
+      - name: Run CI
+        run: mvn --batch-mode -Drevision=${{ env.RELEASE_VERSION }} -Dsha1= -Dchangelist= clean package
