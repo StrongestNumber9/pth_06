@@ -16,7 +16,7 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 
-      - name: Setup Signing
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: 8.0.292+10
