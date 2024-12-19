@@ -30,5 +30,4 @@ jobs:
         if: steps.cache-pull-coverity-distribution.outputs.cache-hit != 'true'
         run: |
           echo hash files ${{ hashFiles(format('{0}/coverity_tool.md5', runner.temp)) }}
-          echo hash files2 ${{ hashFiles(format('{0}/coverity_tool.md5', "${RUNNER_TEMP}")) }}
           echo hash files3 ${{ hashFiles(format('{0}/coverity_tool.md5', ${RUNNER_TEMP})) }}
