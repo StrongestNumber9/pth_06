@@ -33,7 +33,7 @@ jobs:
         if: steps.cache-pull-coverity-distribution.outputs.cache-hit != 'true'
         run: |
           echo hash files ${{ hashFiles('${{ github.workspace }}/coverity_tool.md5') }}
-          echo hash files2 ${{ hashFiles('${{ env.GITHUB_WORKSPACE }}') }}
+          echo hash files2 ${{ hashFiles('${{ env.GITHUB_WORKSPACE }}/coverity_tool.md5') }}
           echo test: ${{ hashFiles(env.COVERITY_FILEPATH) }}
           echo test3: ${{ env.COVERITY_FILEPATH }}
           cat ${{ env.COVERITY_FILEPATH }}
