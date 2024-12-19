@@ -19,15 +19,15 @@ jobs:
       - name: Download Coverity distribution md5sum for cache key
         run: echo ping > ${RUNNER_TEMP}/coverity_tool.md5
 
+      - name: Get filename
+        run: printf "COVERITY_FILEPATH=${{ format('{0}/coverity_tool.md5', runner.temp) }}" >> $GITHUB_ENV
+
       - name: Cache pull Coverity distribution, extracted
         id: cache-pull-coverity-distribution
         uses: actions/cache@v4
         with:
           path: ${{ env.COVERITY }}
           key: ${{ runner.os }}-coverity-${{ hashFiles(format('{0}/coverity_tool.md5', runner.temp)) }}
-
-      - name: Get filename
-        run: printf "COVERITY_FILEPATH=${{ format('{0}/coverity_tool.md5', runner.temp) }}" >> $GITHUB_ENV
           
       - name: Download and extract Coverity distribution if cache-miss
         if: steps.cache-pull-coverity-distribution.outputs.cache-hit != 'true'
