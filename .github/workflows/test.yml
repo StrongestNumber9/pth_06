@@ -26,8 +26,12 @@ jobs:
           path: ${{ env.COVERITY }}
           key: ${{ runner.os }}-coverity-${{ hashFiles(format('{0}/coverity_tool.md5', runner.temp)) }}
 
+      - name: Get filename
+        run: printf "COVERITY_FILEPATH=${{ format('{0}/coverity_tool.md5', runner.temp) }}" >> $GITHUB_ENV
+          
       - name: Download and extract Coverity distribution if cache-miss
         if: steps.cache-pull-coverity-distribution.outputs.cache-hit != 'true'
         run: |
           echo hash files ${{ hashFiles('${{ runner.temp }}/coverity_tool.md5') }}
-          echo test: ${{ format('{0}/coverity_tool.md5', runner.temp) }}
+          echo test: ${{ hashFiles(env.COVERITY_FILEPATH) }}
+          echo test: ${{ env.COVERITY_FILEPATH }}
