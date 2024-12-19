@@ -22,8 +22,5 @@ jobs:
           java-version: 8.0.292+10
           distribution: 'adopt'
 
-      - name: Get version
-        run: printf "RELEASE_VERSION=%q\n" "$(git describe --tags)" >> $GITHUB_ENV
-
       - name: Run CI
-        run: mvn --batch-mode -Drevision=${{ env.RELEASE_VERSION }} -Dsha1= -Dchangelist= clean package
+        run: mvn --batch-mode clean package
