@@ -27,7 +27,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.COVERITY }}
-          key: ${{ runner.os }}-coverity-${{ hashFiles(env.COVERITY_FILEPATH)) }}
+          key: ${{ runner.os }}-coverity-${{ hashFiles(env.COVERITY_FILEPATH) }}
 
       - name: Remove file
         run: rm -f ${GITHUB_WORKSPACE}/coverity_tool.md5
