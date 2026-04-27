@@ -1,0 +1,75 @@
+name: Release & Publish Docs
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push the new docs tag back to the repo
+      packages: write # If you publish to GHCR/Maven Central
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # CRITICAL: Required for `git describe` to work
+
+      - name: Cache Local Maven Repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Code and Javadoc
+        # Injects the version dynamically just like you requested
+        run: mvn -Dmaven.javadoc.failOnError=false --batch-mode clean package javadoc:javadoc -Drevision=${{ github.event.release.tag_name }} -Dsha1= -Dchangelist=
+
+      - name: Prepare Antora Documentation Tag
+        run: |
+          set -x
+          mkdir antora-build
+          cd antora-build
+
+          # 1. Generate the dynamic antora.yml with the hardcoded version
+          cat <<EOF > antora.yml
+          name: ${{ github.event.repository.name }}
+          title: ${{ github.event.repository.name }}
+          version: '${{ github.event.release.tag_name }}'
+          nav:
+            - modules/ROOT/nav.adoc
+          EOF
+
+          # 2. Recreate the Antora directory structure
+          mkdir -p modules/ROOT/pages
+
+          # 3. Copy your handwritten AsciiDoc files into Antora
+          cp -rv ../docs/* modules/ROOT/pages/ || true
+          cp -v ../docs/nav.adoc modules/ROOT/ || true
+
+          # 4. Copy the generated Javadoc into the Antora structure
+          # Antora will serve this at: /my-component/1.2.3/api-reference/
+          mkdir -p api-reference
+          cp -rv ../target/site/apidocs/* api-reference/
+
+      - name: Push Docs Tag to GitHub
+        run: |
+          cd antora-build
+          find .
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Automated docs release for ${{ github.event.release.tag_name }}"
+
+          # Push this directly as a new tag (e.g., docs-1.2.3)
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:refs/tags/${{ github.event.release.tag_name }}-docs
