@@ -32,7 +32,7 @@ jobs:
 
       - name: Build Code and Javadoc
         # Injects the version dynamically just like you requested
-        run: mvn -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc -Drevision=${{ github.event.release.tag_name }} -Dsha1= -Dchangelist=
+        run: mvn -Djooq.regenerate.skip=true -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc -Drevision=${{ github.event.release.tag_name }} -Dsha1= -Dchangelist=
 
       - name: Prepare Antora Documentation Tag
         run: |
