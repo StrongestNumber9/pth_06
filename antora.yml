@@ -1,0 +1,10 @@
+name: pth_06
+title: pth_06
+version: '2.0.3'
+ext:
+  collector:
+    - scan:
+        dir: api-reference
+        into: modules/ROOT/attachments/javadoc
+nav:
+  - modules/ROOT/nav.adoc
