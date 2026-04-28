@@ -6,4 +6,3 @@ ext:
     - scan:
         dir: javadoc
         into: modules/ROOT/attachments/javadoc
-
