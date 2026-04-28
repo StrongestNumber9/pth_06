@@ -1,0 +1,8 @@
+name: pth_06
+title: pth_06
+version: true
+ext:
+  collector:
+    - scan:
+        dir: javadoc
+        into: modules/ROOT/attachments/javadoc
