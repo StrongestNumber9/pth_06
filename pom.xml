@@ -48,7 +48,6 @@
       <version>1.3.12</version>
       <scope>test</scope>
     </dependency>
-    <!-- Tokenizer -->
     <dependency>
       <groupId>com.teragrep</groupId>
       <artifactId>blf_01</artifactId>
