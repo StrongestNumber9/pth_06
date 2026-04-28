@@ -47,10 +47,9 @@ jobs:
           version: '${{ github.event.release.tag_name }}'
           ext:
             collector:
-              scan:
-              - dir: api-reference/
-                files: '**/*'
-                into: modules/ROOT/api-reference/
+              - scan:
+                  dir: api-reference
+                  into: modules/ROOT/attachments/javadoc
           nav:
             - modules/ROOT/nav.adoc
           EOF
