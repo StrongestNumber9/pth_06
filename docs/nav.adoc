@@ -1,2 +1,2 @@
 .Test
-* xref:antora.adoc[Test]
+* link:_attachments/javadoc/index.html[API Reference (Javadoc)]

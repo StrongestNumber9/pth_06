@@ -45,6 +45,12 @@ jobs:
           name: ${{ github.event.repository.name }}
           title: ${{ github.event.repository.name }}
           version: '${{ github.event.release.tag_name }}'
+          ext:
+            collector:
+              scan:
+              - dir: api-reference/
+                files: '**/*'
+                into: modules/ROOT/api-reference/
           nav:
             - modules/ROOT/nav.adoc
           EOF

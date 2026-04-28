@@ -1,3 +1,5 @@
 # Test
 
 Antora test
+
+include::attachment$javadoc/index.html[optional attributes]

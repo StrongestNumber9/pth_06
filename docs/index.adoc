@@ -1,4 +1,8 @@
 [[main-content]]
 
-= pth_06 test
+= pth_06
 :toc:
+
+++++
+<iframe src="_attachments/javadoc/index.html" style="height: 80vh; width: 80vh;"></iframe>
+++++
