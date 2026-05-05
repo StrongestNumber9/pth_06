@@ -4,7 +4,7 @@ version: true
 ext:
   collector:
     - run:
-        command: mvn -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc
+        command: mvn -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc -Pbuild-nogenerate
     - scan:
         dir: target/site/apidocs/
         into: modules/ROOT/attachments/javadoc
