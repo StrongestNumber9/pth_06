@@ -5,7 +5,7 @@ ext:
   collector:
     - run:
       - command: mvn -Denforcer.skip=true -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc -Pbuild-nogenerate
-      - command: cp -v ${GITHUB_WORKSPACE}/nav.adoc modules/ROOT/nav.adoc
+      - command: bash -c 'cp -v ${GITHUB_WORKSPACE}/nav.adoc modules/ROOT/nav.adoc'
     - scan:
         dir: target/site/apidocs/
         into: modules/ROOT/attachments/javadoc
