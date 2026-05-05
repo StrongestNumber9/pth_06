@@ -3,7 +3,8 @@ title: pth_06
 version: true
 ext:
   collector:
+    - run:
+        command: mvn -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc
     - scan:
-        run: mvn -Dmaven.javadoc.failOnError=false --batch-mode clean javadoc:javadoc
         dir: target/site/apidocs/
         into: modules/ROOT/attachments/javadoc
