@@ -10,4 +10,4 @@ ext:
         dir: target/site/apidocs/
         into: modules/ROOT/attachments/javadoc
 nav:
-  - modules/ROOT/nav.adoc
+  - README.adoc
